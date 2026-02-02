@@ -23,7 +23,7 @@
             position: relative;
         }
 
-       
+        
         .hearts-bg {
             position: fixed;
             top: 0;
@@ -59,7 +59,7 @@
             }
         }
 
-      
+        
         .card {
             position: relative;
             z-index: 10;
@@ -139,11 +139,12 @@
 
         .buttons-container {
             display: flex;
+            flex-direction: row;
             justify-content: center;
+            align-items: center;
             gap: 30px;
             margin-top: 20px;
             min-height: 60px;
-            position: relative;
         }
 
         .btn {
@@ -178,7 +179,6 @@
             background: linear-gradient(135deg, #a8a8a8 0%, #888888 100%);
             color: white;
             box-shadow: 0 8px 25px rgba(136, 136, 136, 0.3);
-            position: absolute;
             transition: none;
         }
 
@@ -268,7 +268,7 @@
             }
         }
 
-        
+       
         .sparkle {
             position: absolute;
             width: 10px;
@@ -316,7 +316,7 @@
         </div>
     </div>
 
- 
+    
     <div class="congrats-overlay" id="congratsOverlay">
         <div class="congrats-heart">💕</div>
         <h1 class="congrats-text">Congratulations!</h1>
@@ -324,7 +324,7 @@
     </div>
 
     <script>
-       
+        
         function createFloatingHearts() {
             const heartsBg = document.getElementById('heartsBg');
             const hearts = ['💕', '💖', '💗', '💓', '💘', '❤️', '💝'];
@@ -342,13 +342,13 @@
         }
         createFloatingHearts();
 
-       
+        
         const noBtn = document.getElementById('noBtn');
-        let escapeDistance = 180; 
+        let escapeDistance = 180; // Balanced detection
         let isEscaping = false;
         let escapeCount = 0;
         
-       
+        
         const roastMessages = [
             "Itni bhi buri nahi hai life! 😜",
             "Arey seriously? No? 🙄",
@@ -400,7 +400,7 @@
             if (distance < escapeDistance) {
                 escapeCount++;
                 
-              
+                
                 noBtn.textContent = roastMessages[Math.floor(Math.random() * roastMessages.length)];
                 noBtn.style.padding = '15px 25px';
                 noBtn.style.fontSize = '1rem';
@@ -423,16 +423,16 @@
                 const escapeX = -Math.cos(randomAngle) * escapeMultiplier;
                 const escapeY = -Math.sin(randomAngle) * escapeMultiplier;
                 
-             
+               
                 let newX = btnRect.left + escapeX;
                 let newY = btnRect.top + escapeY;
                 
-                
+               
                 const padding = 30;
                 const maxX = window.innerWidth - btnRect.width - padding;
                 const maxY = window.innerHeight - btnRect.height - padding;
                 
-               
+                
                 if (newX < padding || newX > maxX) {
                     newX = newX < padding ? maxX - Math.random() * 200 : padding + Math.random() * 200;
                 }
@@ -451,7 +451,7 @@
             }
         });
 
-       
+        
         noBtn.addEventListener('mouseenter', function() {
             randomJump();
             noBtn.textContent = roastMessages[Math.floor(Math.random() * roastMessages.length)];
@@ -468,7 +468,7 @@
             return false;
         });
 
-       
+        
         document.addEventListener('touchmove', function(e) {
             const touch = e.touches[0];
             const mouseEvent = new MouseEvent('mousemove', {
@@ -478,13 +478,13 @@
             document.dispatchEvent(mouseEvent);
         });
 
-       
+        
         function sayYes() {
             document.getElementById('congratsOverlay').classList.add('show');
             createConfetti();
         }
 
-       
+        
         function createConfetti() {
             const colors = ['#ff6b95', '#ff4777', '#ffd700', '#ff69b4', '#ff1493', '#ffffff', '#ffb6c1'];
             const shapes = ['❤️', '💕', '✨', '🎉', '💖'];
@@ -494,7 +494,7 @@
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     
-                    
+                   
                     if (Math.random() > 0.5) {
                         confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
                         confetti.style.fontSize = (15 + Math.random() * 15) + 'px';
